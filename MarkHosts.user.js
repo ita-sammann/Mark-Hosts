@@ -6,7 +6,7 @@
 
 (function(){
 
-  var color = '#F00';
+  var color = '#069';
 
 	var getFaviconTag = function() {
 		var links = document.getElementsByTagName( 'link' );
