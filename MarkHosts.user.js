@@ -6,7 +6,7 @@
 
 (function(){
 
-  var color = '#F00'
+  var color = '#F00';
 
 	var getFaviconTag = function() {
 		var links = document.getElementsByTagName( 'link' );
@@ -43,32 +43,33 @@
     return tag ? tag.getAttribute( 'href' ) : '/favicon.ico';
 	};
 
+  document.addEventListener( 'DOMContentLoaded', function() {
 
-  var canvas = document.createElement( 'canvas' );
-  canvas.width = 16;
-  canvas.height = 16;
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = 16;
+    canvas.height = 16;
 
-  var context = canvas.getContext( '2d' );
+    var context = canvas.getContext( '2d' );
 
-  var favicon = new Image();
+    var favicon = new Image();
 
-  favicon.onload = function() {
+    favicon.onload = function() {
+      // Draw original favicon
+      context.drawImage( favicon, 0, 0, favicon.width, favicon.height, 0, 0, 16, 16 );
+      // Draw box around favicon
+      context.strokeStyle = '#000';
+      context.strokeRect( 0.5, 0.5, 15, 15 );
+      context.strokeRect( 2.5, 2.5, 11, 11 );
+      context.strokeStyle = color;
+      context.strokeRect( 1.5, 1.5, 13, 13 );
+      // Refresh tag in page
+      setFaviconTag( canvas.toDataURL() );
 
-    // Draw original favicon
-    context.drawImage( favicon, 0, 0, favicon.width, favicon.height, 0, 0, 16, 16 );
+    };
 
-    // Draw box around favicon
-    context.strokeStyle = '#000';
-    context.strokeRect( 0.5, 0.5, 15, 15 );
-    context.strokeRect( 2.5, 2.5, 11, 11 );
-    context.strokeStyle = color;
-    context.strokeRect( 1.5, 1.5, 13, 13 );
+    favicon.crossOrigin = 'anonymous';
+    favicon.src = getCurrentFavicon();
 
-    // Refresh tag in page
-    setFaviconTag( canvas.toDataURL() );
-
-  };
-
-  favicon.src = getCurrentFavicon();
-
+  }, false );
+  
 })();
