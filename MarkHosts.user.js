@@ -50,7 +50,7 @@
     canvas.height = 16;
 
     var context = canvas.getContext( '2d' );
-
+    alert('asds');
     var favicon = new Image();
 
     favicon.onload = function() {
